@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Axe Shop{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">#}
+</head>
+<body>
+<div id="header">
+    <a href="/" class="logo">Axe Shop</a>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+        {% if total_items > 0 %}
+        Корзина:
+        <a href="{% url 'cart:cart_detail' %}">
+            Количество {{ total_items }},
+            {{ cart.get_total_price }} сум
+        </a>
+        {% else %}
+        Ваша корзина пустая
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div id="content">
+    {% block content %}
+
+    {% endblock content %}
+</div>
+{#{% include 'onlineshop/footer.html' %}#}
+</body>
+</html>
